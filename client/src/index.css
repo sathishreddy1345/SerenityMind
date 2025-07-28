@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(142, 76%, 36%);
+  --secondary-foreground: hsl(142, 76%, 96%);
+  --accent: hsl(45, 93%, 47%);
+  --accent-foreground: hsl(45, 93%, 97%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Mental health specific colors */
+  --serenity-blue: hsl(207, 90%, 54%);
+  --serenity-green: hsl(142, 76%, 36%);
+  --serenity-amber: hsl(45, 93%, 47%);
+  --serenity-purple: hsl(270, 50%, 60%);
+  --calm-gray: hsl(220, 13%, 91%);
+  --warm-white: hsl(30, 100%, 98%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(142, 76%, 36%);
+  --secondary-foreground: hsl(142, 76%, 96%);
+  --accent: hsl(45, 93%, 47%);
+  --accent-foreground: hsl(45, 93%, 97%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground transition-colors duration-300;
+  }
+  
+  html {
+    @apply transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .mood-btn {
+    @apply transition-all duration-200 hover:scale-105 active:scale-95;
+  }
+  
+  .mood-btn.selected {
+    @apply bg-primary bg-opacity-20 border-2 border-primary;
+  }
+  
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--serenity-blue), var(--serenity-green));
+  }
+  
+  .gradient-secondary {
+    background: linear-gradient(135deg, var(--serenity-green), var(--serenity-amber));
+  }
+  
+  .breathing-circle {
+    @apply transition-transform duration-[4000ms] ease-in-out;
+  }
+  
+  .breathing-circle.inhale {
+    @apply scale-125;
+  }
+  
+  .breathing-circle.exhale {
+    @apply scale-75;
+  }
+  
+  .chat-message {
+    @apply animate-in slide-in-from-bottom-2 duration-300;
+  }
+  
+  .habit-completed {
+    @apply bg-secondary/20 text-secondary-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground bg-opacity-30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground bg-opacity-50;
+}
+
+/* Animation for mood selection */
+@keyframes moodPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.mood-selected {
+  animation: moodPulse 0.6s ease-in-out;
+}
+
+/* Breathing exercise animation */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.breathing-animation {
+  animation: breathe 4s ease-in-out infinite;
+}
